@@ -14,6 +14,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ProductHttp } from "../providers/product-http";
 import { HttpModule } from '@angular/http';
 import { ProductDetailPage } from '../pages/product-detail/product-detail';
+import { Cart } from '../providers/cart';
+import { MyCartPage } from '../pages/my-cart/my-cart';
+import { ButtonCartComponent } from '../components/button-cart/button-cart';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { PaymentHttp } from '../providers/payment-http';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,10 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
     HomePage,
     TabsPage, 
     ProductsListPage,
-    ProductDetailPage
+    ProductDetailPage,
+    MyCartPage,
+    ButtonCartComponent,
+    CheckoutPage
   ],
   imports: [
     BrowserModule,
@@ -39,6 +47,16 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
           component: ProductDetailPage,
           segment: 'products/:product/detail',
           name: 'ProductDetail'
+        },
+        {
+          component: MyCartPage,
+          segment: 'my-cart',
+          name: 'MyCart'
+        },
+        {
+          component: CheckoutPage,
+          segment: 'checkout',
+          name: 'Checkout'
         }
       ]
     }),
@@ -52,13 +70,17 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
     HomePage,
     TabsPage,
     ProductsListPage,
-    ProductDetailPage
+    ProductDetailPage,
+    MyCartPage,
+    CheckoutPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductHttp
+    ProductHttp,
+    Cart,
+    PaymentHttp
   ]
 })
 export class AppModule {}

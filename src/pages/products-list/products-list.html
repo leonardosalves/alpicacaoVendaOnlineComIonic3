@@ -11,6 +11,9 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     <ion-title>Listagem de Produtos</ion-title>
+    <ion-buttons end>
+     <button-cart></button-cart>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -24,6 +27,9 @@
       </ion-thumbnail>
       <h2 [innerHTML]="product.name"></h2>
       <p [innerHTML]="'R$ '+product.price"></p>
+      <button ion-button item-end icon-only clear (click)="addItem(product)">
+        <ion-icon name="cart"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
   <ng-template #loading>
