@@ -7,9 +7,13 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ProductsListPage } from "../pages/products-list/products-list";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ProductHttp } from "../providers/product-http";
+import { HttpModule } from '@angular/http';
+import { ProductDetailPage } from '../pages/product-detail/product-detail';
 
 @NgModule({
   declarations: [
@@ -17,11 +21,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage, 
+    ProductsListPage,
+    ProductDetailPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{},{
+      links:
+      [
+        {
+          component: ProductsListPage,
+          segment: 'products',
+          name: 'Products'
+        },
+        {
+          component: ProductDetailPage,
+          segment: 'products/:product/detail',
+          name: 'ProductDetail'
+        }
+      ]
+    }),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +50,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ProductsListPage,
+    ProductDetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ProductHttp
   ]
 })
 export class AppModule {}

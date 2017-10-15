@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Nav, NavController, Platform } from 'ionic-angular';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -9,6 +9,9 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(Nav)
+  navRefence : Nav;
+
   rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -19,4 +22,8 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+selectTab( index ){
+  this.navRefence.setRoot( TabsPage, { index: index } );
+}
+
 }
